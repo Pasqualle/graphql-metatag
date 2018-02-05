@@ -6,23 +6,25 @@ use Drupal\graphql\Plugin\GraphQL\Fields\FieldPluginBase;
 use Youshido\GraphQL\Execution\ResolveInfo;
 
 /**
- * The metatags content field.
+ * The metatags html tag field.
  *
  * @GraphQLField(
- *   id = "meta_value",
- *   name = "value",
+ *   id = "meta_html_tag",
+ *   name = "htmlTag",
+ *   secure = true,
  *   type = "String",
- *   types = {"MetaTag"}
+ *   parents = {"MetaTag"},
+ *   nullable = TRUE
  * )
  */
-class MetaValue extends FieldPluginBase {
+class MetaHtmlTag extends FieldPluginBase {
 
   /**
    * {@inheritdoc}
    */
   protected function resolveValues($value, array $args, ResolveInfo $info) {
-    if (is_array($value) && array_key_exists('value', $value)) {
-      yield $value['value'];
+    if (isset($value['#tag'])) {
+      yield $value['#tag'];
     }
   }
 

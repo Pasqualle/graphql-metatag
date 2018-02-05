@@ -6,19 +6,19 @@ use Drupal\graphql\Plugin\GraphQL\Types\TypePluginBase;
 use Youshido\GraphQL\Execution\ResolveInfo;
 
 /**
- * The GraphQL type representing meta link.
+ * The GraphQL type representing metatags
  *
  * @GraphQLType(
- *   id = "meta_link",
- *   name = "MetaLink",
+ *   id = "meta_meta",
+ *   name = "MetaMeta",
  *   interfaces = {"MetaTag"}
  * )
  */
-class MetaLink extends TypePluginBase {
+class MetaMeta extends TypePluginBase {
   /**
    * {@inheritdoc}
    */
   public function applies($value, ResolveInfo $info = NULL) {
-    return $value['#tag'] == 'link';
+    return $value['#tag'] == 'meta';
   }
 }

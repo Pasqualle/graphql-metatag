@@ -9,15 +9,18 @@ use Youshido\GraphQL\Execution\ResolveInfo;
  * GraphQL field resolving an Entity's language.
  *
  * @GraphQLField(
- *   id = "metatags",
- *   name = "metatags",
+ *   id = "metatag_by_name",
+ *   name = "metatagByName",
  *   type = "MetaTag",
  *   parents = {"Entity"},
  *   multi = TRUE,
  *   secure = TRUE,
- * )
+ *    arguments = {
+ *     "name" = "String"
+ *    }
+  * )
  */
-class Metatags extends MetatagPluginBase {
+class MetatagByName extends MetatagPluginBase {
 
   /**
    * {@inheritdoc}
@@ -25,8 +28,11 @@ class Metatags extends MetatagPluginBase {
   public function resolveValues($value, array $args, ResolveInfo $info) {
     if ($value instanceof ContentEntityInterface) {
       $tags = $this->getAllMetatags($value);
+
       foreach ($tags as $name => $tag) {
-        yield $tag;
+        if (isset($tag['#attributes']['name']) && $tag['#attributes']['name'] == $args['name']) {
+          yield $tag;
+        }
       }
     }
   }
