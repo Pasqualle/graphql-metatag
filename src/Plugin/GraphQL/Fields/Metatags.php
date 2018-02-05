@@ -6,7 +6,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Youshido\GraphQL\Execution\ResolveInfo;
 
 /**
- * GraphQL field resolving an Entity's language.
+ * GraphQL field resolving metatags on entities.
  *
  * @GraphQLField(
  *   id = "metatags",
